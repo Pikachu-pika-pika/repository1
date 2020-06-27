@@ -3,8 +3,7 @@ pipeline {
     agent{node('master')}
     stages {
         stages('Clean workspase & download dist') {
-     
-            steps {
+              steps {
                 script {
                     cleanWs()
                     withCredentials([ usernamePassword(credentialsId: 'srv_sudo',
@@ -13,10 +12,10 @@ pipeline {
                        { try 
                             { sh "echo '$(password)' | sudo -S docker stop isng"
                               sh "echo '$(password)' | sudo -S docker container isng"
-                         catch (Exception e) { print 'container not exist, skip clean'}
+                         catch (Exception e) {
+                            print 'container not exist, skip clean'}
                          }
-                        }
-                        
+                        }                   
                    
                 }
                 script {
