@@ -12,12 +12,12 @@ pipeline {
                        { try 
                        { sh "echo '${password}' | sudo -S docker stop AnnaM"
                         sh "echo '${password}' | sudo -S docker container rm AnnaM"}
-                         catch (Exception e) {
-                            print 'container not exist, skip clean'}
+                         catch (Exception e) 
+                        {print 'container not exist, skip clean'}
                          }
                         }                   
                    
-                }
+                     }
                 script {
                     echo 'Update  from repository'
                     checkout([$class                           : 'GitSCM',
@@ -51,7 +51,7 @@ pipeline {
                                       usernameVariable: 'username',
                                       passwordVariable: 'password')])
                    { sh "echo '${password}' | sudo -S docker exec -t AnnaM bash -c 'df -h > /start/states.txt"
-                    sh "echo '${password}' | sudo -S docker exec -t AnnaM bash -c 'top -n >> /start/states.txt"
+                    sh "echo '${password}' | sudo -S docker exec -t AnnaM bash -c 'top -n >> /start/states.txt"}
                 }
             }
         }
