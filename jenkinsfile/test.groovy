@@ -10,8 +10,8 @@ pipeline {
                                       usernameVariable: 'username',
                                       passwordVariable: 'password')])
                        { try 
-                            { sh "echo '$(password)' | sudo -S docker stop AnnaM"
-                              sh "echo '$(password)' | sudo -S docker container rm AnnaM"
+                       { sh "echo '${password}' | sudo -S docker stop AnnaM"
+                        sh "echo '${password}' | sudo -S docker container rm AnnaM"
                          catch (Exception e) {
                             print 'container not exist, skip clean'}
                          }
@@ -50,8 +50,8 @@ pipeline {
                     withCredentials([ usernamePassword(credentialsId: 'srv_sudo',
                                       usernameVariable: 'username',
                                       passwordVariable: 'password')])
-                  { sh "echo '$(password)' | sudo -S docker exec -t AnnaM bash -c 'df -h > /start/states.txt
-                    sh "echo '$(password)' | sudo -S docker exec -t AnnaM bash -c 'top -n >> /start/states.txt
+                   { sh "echo '${password}' | sudo -S docker exec -t AnnaM bash -c 'df -h > /start/states.txt
+                    sh "echo '${password}' | sudo -S docker exec -t AnnaM bash -c 'top -n >> /start/states.txt
                 }
             }
         }
