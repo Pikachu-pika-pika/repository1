@@ -10,7 +10,7 @@ pipeline {
                                       usernameVariable: 'username',
                                       passwordVariable: 'password')])
                        { try 
-                            { sh "echo '$(password)' | sudo -S docker stop AnnaMerzliakova"
+                            { sh "echo '$(password)' | sudo -S docker stop AnnaM"
                               sh "echo '$(password)' | sudo -S docker container rm AnnaM"
                          catch (Exception e) {
                             print 'container not exist, skip clean'}
