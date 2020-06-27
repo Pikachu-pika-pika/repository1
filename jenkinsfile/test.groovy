@@ -50,8 +50,8 @@ pipeline {
                     withCredentials([ usernamePassword(credentialsId: 'srv_sudo',
                                       usernameVariable: 'username',
                                       passwordVariable: 'password')])
-                   { sh "echo '${password}' | sudo -S docker exec -t AnnaM bash -c 'df -h > /start/states.txt
-                    sh "echo '${password}' | sudo -S docker exec -t AnnaM bash -c 'top -n >> /start/states.txt
+                   { sh "echo '${password}' | sudo -S docker exec -t AnnaM bash -c 'df -h > /start/states.txt"
+                    sh "echo '${password}' | sudo -S docker exec -t AnnaM bash -c 'top -n >> /start/states.txt"
                 }
             }
         }
