@@ -40,7 +40,7 @@ pipeline {
                 }
             }
         }
-        stage ('Получаение и запись статистики'){
+        stage ('Получаение статистики'){
             steps{
                 script{
                         withCredentials([ usernamePassword(credentialsId: 'srv_sudo',
