@@ -14,7 +14,7 @@ pipeline {
                              sh "echo '${password}' | sudo -S docker container rm AnnaM"}
                          catch (Exception e) 
                            {print 'container not exist, skip clean'}
-                           }
+                           
                           }                   
                        }
                 script {
@@ -26,7 +26,7 @@ pipeline {
                                                                    relativeTargetDir: 'auto']],
                               submoduleCfg                     : [],
                               userRemoteConfigs                : [[credentialsId: 'AnnaM', url: 'https://github.com/Pikachu-pika-pika/repository1.git']]])
-                  }
+                  
                 }
             }
         }
@@ -43,10 +43,9 @@ pipeline {
         stage ('Build & run doker image'){
             steps{
                 script{
-                cleanWs()
-                    withCredentials([ usernamePassword(credentialsId: 'srv_sudo',
-                                      usernameVariable: 'username',
-                                      passwordVariable: 'password')])
+                        withCredentials([ usernamePassword(credentialsId: 'srv_sudo',
+                                          usernameVariable: 'username',
+                                          passwordVariable: 'password')])
                    { sh "echo '${password}' | sudo -S docker exec -t AnnaM bash -c 'df -h > /start/states.txt"
                     sh "echo '${password}' | sudo -S docker exec -t AnnaM bash -c 'top -n >> /start/states.txt"}
                 }
