@@ -2,7 +2,7 @@
 pipeline {
     agent{node('master')}
     stages {
-        ('Clean workspase & download dist') {
+        stage('Clean workspase & download dist') {
               steps {
                 script {
                     cleanWs()
