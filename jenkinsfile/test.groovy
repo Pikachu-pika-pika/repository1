@@ -2,7 +2,7 @@
 pipeline {
     agent{node('master')}
     stages {
-        stage('Очистка пространства и загрузка дистрибутива') {
+        stage('Очистка пространства, загрузка дистрибутива') {
               steps {
                 script {
                     cleanWs()
@@ -13,7 +13,7 @@ pipeline {
                            { sh "echo '${password}' | sudo -S docker stop AnnaM"
                              sh "echo '${password}' | sudo -S docker container rm AnnaM"}
                          catch (Exception e) 
-                           {print 'container not exist, skip clean'}
+                           {print 'Контейнер не найден'}
                            
                           }                   
                        }
@@ -30,17 +30,25 @@ pipeline {
                 }
             }
         }
-        stage ('Сборка и запуск образа'){
+        stage ('Сборкаобраза'){
             steps{
                 script{withCredentials([ usernamePassword(credentialsId: 'srv_sudo',
                                           usernameVariable: 'username',
                                           passwordVariable: 'password')])
-                  {  sh "echo '${password}' | sudo -S docker build ${WORKSPACE}/auto -t AnnaM"
-                     sh "echo '${password}' | sudo -S docker run -d -p 6784:80 --name AnnaM -v /home/adminci/is_mount_dir:/start AnnaM"}
+                  {sh "echo '${password}' | sudo -S docker run -d -p 6784:80 --name AnnaM -v /home/adminci/is_mount_dir:/start AnnaM"}
                 }
             }
         }
-        stage ('Получаение статистики'){
+       stage ('Запуск образа'){
+            steps{
+                script{withCredentials([ usernamePassword(credentialsId: 'srv_sudo',
+                                          usernameVariable: 'username',
+                                          passwordVariable: 'password')])
+                  {  sh "echo '${password}' | sudo -S docker build ${WORKSPACE}/auto -t AnnaM"}
+                }
+            }
+        }
+        stage ('Получение статистики'){
             steps{
                 script{
                         withCredentials([ usernamePassword(credentialsId: 'srv_sudo',
