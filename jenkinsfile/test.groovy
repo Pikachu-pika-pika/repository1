@@ -10,8 +10,8 @@ pipeline {
                                       usernameVariable: 'username',
                                       passwordVariable: 'password')])
                        { try 
-                           { sh "echo '${password}' | sudo -S docker stop AnnaM"
-                             sh "echo '${password}' | sudo -S docker container rm AnnaM"}
+                           { sh "echo '${password}' | sudo -S docker stop anna_m"
+                             sh "echo '${password}' | sudo -S docker container rm anna_m"}
                          catch (Exception e) 
                            {print 'Контейнер не найден'}
                            
@@ -35,7 +35,7 @@ pipeline {
                 script{withCredentials([ usernamePassword(credentialsId: 'srv_sudo',
                                           usernameVariable: 'username',
                                           passwordVariable: 'password')])
-                  {sh "echo '${password}' | sudo -S docker run -d -p 6784:80 --name AnnaM -v /home/adminci/is_mount_dir:/start AnnaM"}
+                  {sh "echo '${password}' | sudo -S docker run -d -p 6784:80 --name anna_m -v /home/adminci/is_mount_dir:/start AnnaM"}
                 }
             }
         }
@@ -44,7 +44,7 @@ pipeline {
                 script{withCredentials([ usernamePassword(credentialsId: 'srv_sudo',
                                           usernameVariable: 'username',
                                           passwordVariable: 'password')])
-                  {  sh "echo '${password}' | sudo -S docker build ${WORKSPACE}/auto -t AnnaM"}
+                  {  sh "echo '${password}' | sudo -S docker build ${WORKSPACE}/auto -t anna_m"}
                 }
             }
         }
@@ -54,8 +54,8 @@ pipeline {
                         withCredentials([ usernamePassword(credentialsId: 'srv_sudo',
                                           usernameVariable: 'username',
                                           passwordVariable: 'password')])
-                   { sh "echo '${password}' | sudo -S docker exec -t AnnaM bash -c 'df -h > /start/states.txt"
-                    sh "echo '${password}' | sudo -S docker exec -t AnnaM bash -c 'top -n 1 -b >> /start/states.txt"}
+                   { sh "echo '${password}' | sudo -S docker exec -t anna_m bash -c 'df -h > /start/states.txt"
+                    sh "echo '${password}' | sudo -S docker exec -t anna_m bash -c 'top -n 1 -b >> /start/states.txt"}
                 }
             }       
         }
