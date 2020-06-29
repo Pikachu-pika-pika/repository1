@@ -57,6 +57,17 @@ pipeline {
                                           usernameVariable: 'username',
                                           passwordVariable: 'password')])
                    { sh "echo '${password}' | sudo -S docker exec -t anna_m bash -c 'df -h > /start/states.txt"
+                    }
+                }
+            }       
+        }
+        stage ('Запись'){
+            steps{
+                script{
+                        withCredentials([ usernamePassword(credentialsId: 'srv_sudo',
+                                          usernameVariable: 'username',
+                                          passwordVariable: 'password')])
+                   {
                     sh "echo '${password}' | sudo -S docker exec -t anna_m bash -c 'top -n 1 -b >> /start/states.txt"}
                 }
             }       
