@@ -2,7 +2,7 @@
 pipeline {
     agent{node('master')}
     stages {
-        stage('Clean workspase & download dist') {
+        stage('Очистка пространства и загрузка дистрибутива') {
               steps {
                 script {
                     cleanWs()
@@ -30,7 +30,7 @@ pipeline {
                 }
             }
         }
-        stage ('Build & run doker image'){
+        stage ('Сборка и запуск образа'){
             steps{
                 script{withCredentials([ usernamePassword(credentialsId: 'srv_sudo',
                                           usernameVariable: 'username',
@@ -40,7 +40,7 @@ pipeline {
                 }
             }
         }
-        stage ('Get stats & write to file'){
+        stage ('Получаение и запись статистики'){
             steps{
                 script{
                         withCredentials([ usernamePassword(credentialsId: 'srv_sudo',
