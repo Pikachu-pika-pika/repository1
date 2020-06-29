@@ -35,7 +35,7 @@ pipeline {
                 script{withCredentials([ usernamePassword(credentialsId: 'srv_sudo',
                                           usernameVariable: 'username',
                                           passwordVariable: 'password')])
-                  {sh "echo '${password}' | sudo -S docker run -d -p 6784:80 --name anna_m -v /home/adminci/is_mount_dir:/start AnnaM"}
+                  {sh "echo '${password}' | sudo -S docker run -d -p 6784:80 --name anna_m -v /home/adminci/is_mount_dir:/start anna_m"}
                 }
             }
         }
