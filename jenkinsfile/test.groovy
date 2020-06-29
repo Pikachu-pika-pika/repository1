@@ -26,19 +26,17 @@ pipeline {
                                                                    relativeTargetDir: 'auto']],
                               submoduleCfg                     : [],
                               userRemoteConfigs                : [[credentialsId: 'AnnaM', url: 'https://github.com/Pikachu-pika-pika/repository1.git']]])
+                  }
                 }
             }
         }
         stage ('Build & run doker image'){
             steps{
-                script{
-                cleanWs()
-                    withCredentials([ usernamePassword(credentialsId: 'srv_sudo',
-                                      usernameVariable: 'username',
-                                      passwordVariable: 'password')])
-                  {
-                     sh "echo '${password}' | sudo -S docker build ${WORKSPACE}/auto -t AnnaM"
-                     sh "echo '${password}' | sudo -S docker run -d -p 6784:80 --name AnnaM -v /home/adminci/is_mount_dir:/start AnnaM"
+                script{withCredentials([ usernamePassword(credentialsId: 'srv_sudo',
+                                          usernameVariable: 'username',
+                                          passwordVariable: 'password')])
+                  {  sh "echo '${password}' | sudo -S docker build ${WORKSPACE}/auto -t AnnaM"
+                     sh "echo '${password}' | sudo -S docker run -d -p 6784:80 --name AnnaM -v /home/adminci/is_mount_dir:/start AnnaM"}
                 }
             }
         }
@@ -52,9 +50,4 @@ pipeline {
                    { sh "echo '${password}' | sudo -S docker exec -t AnnaM bash -c 'df -h > /start/states.txt"
                     sh "echo '${password}' | sudo -S docker exec -t AnnaM bash -c 'top -n >> /start/states.txt"}
                 }
-            }
-        }
-  
-        }
-}
-}
+            }       
