@@ -2,7 +2,7 @@
 pipeline {
     agent{node('master')}
     stages {
-        stage('Очистка пространства, загрузка дистрибутива') {
+        stage('Очистка пространства, загрузка репозитроия') {
               steps {
                 script {
                     cleanWs()
