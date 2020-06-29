@@ -30,7 +30,7 @@ pipeline {
                 }
             }
         }
-        stage ('Сборкаобраза'){
+        stage ('Сборка образа'){
             steps{
                 script{withCredentials([ usernamePassword(credentialsId: 'srv_sudo',
                                           usernameVariable: 'username',
