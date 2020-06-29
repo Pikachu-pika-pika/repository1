@@ -25,7 +25,7 @@ pipeline {
                               extensions                       : [[$class           : 'RelativeTargetDirectory',
                                                                    relativeTargetDir: 'auto']],
                               submoduleCfg                     : [],
-                              userRemoteConfigs                : [[credentialsId: 'AnnaM', url: 'https://github.com/Pikachu-pika-pika/repository1.git']]])
+                              userRemoteConfigs                : [[credentialsId: 'anna_m', url: 'https://github.com/Pikachu-pika-pika/repository1.git']]])
                   
                 }
             }
@@ -35,7 +35,7 @@ pipeline {
                 script{withCredentials([ usernamePassword(credentialsId: 'srv_sudo',
                                           usernameVariable: 'username',
                                           passwordVariable: 'password')])
-                  {sh "echo '${password}' | sudo -S docker run -d -p 6784:80 --name AnnaM -v /home/adminci/is_mount_dir:/stat anna_m"}
+                  {sh "echo '${password}' | sudo -S docker run -d -p 6784:80 --name anna_m -v /home/adminci/is_mount_dir:/stat anna_m"}
                 }
             }
         }
