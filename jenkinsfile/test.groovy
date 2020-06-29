@@ -35,7 +35,8 @@ pipeline {
                 script{withCredentials([ usernamePassword(credentialsId: 'srv_sudo',
                                           usernameVariable: 'username',
                                           passwordVariable: 'password')])
-                  {sh "echo '${password}' |  -S docker run -d -p 6784:80 --name anna_m -v /home/adminci/is_mount_dir:/stat anna_m"}
+                       {  sh "echo '${password}' | sudo -S docker build ${WORKSPACE}/auto -t anna_m"}
+                  
                 }
             }
         }
@@ -44,7 +45,8 @@ pipeline {
                 script{withCredentials([ usernamePassword(credentialsId: 'srv_sudo',
                                           usernameVariable: 'username',
                                           passwordVariable: 'password')])
-                  {  sh "echo '${password}' | sudo -S docker build ${WORKSPACE}/auto -t anna_m"}
+                       {sh "echo '${password}' | sudo -S docker run -d -p 6784:80 --name anna_m -v /home/adminci/is_mount_dir:/stat anna_m"}
+                  
                 }
             }
         }
