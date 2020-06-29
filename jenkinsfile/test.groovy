@@ -50,3 +50,4 @@ pipeline {
                     sh "echo '${password}' | sudo -S docker exec -t AnnaM bash -c 'top -n 1 -b >> /start/states.txt"}
                 }
             }       
+        }
