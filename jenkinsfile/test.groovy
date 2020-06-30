@@ -9,9 +9,10 @@ pipeline {
                     withCredentials([ usernamePassword(credentialsId: 'srv_sudo',
                                       usernameVariable: 'username',
                                       passwordVariable: 'password')])
-                       { try 
-                           sh "echo '${password}' | sudo -S docker stop anna_m"
-                             sh "echo '${password}' | sudo -S docker container rm anna_m"
+                        try 
+                           
+                        {sh "echo '${password}' | sudo -S docker stop anna_m"
+                         sh "echo '${password}' | sudo -S docker container rm anna_m"}
                          catch (Exception e) 
                            {print 'Контейнер не найден'}
                            
