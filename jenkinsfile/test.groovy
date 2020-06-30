@@ -16,9 +16,7 @@ pipeline {
                          catch (Exception e) 
                            {print 'Контейнер не найден'}
                            
-                          }   
-                
-                }
+                          
               }
                 script {
                     echo 'Update  from repository'
@@ -31,7 +29,8 @@ pipeline {
                               userRemoteConfigs                : [[credentialsId: 'anna_m', url: 'https://github.com/Pikachu-pika-pika/repository1.git']]])
                   
                 }
-            
+    }
+}
         
         stage ('Сборка'){
             steps{
