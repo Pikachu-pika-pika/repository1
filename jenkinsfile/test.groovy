@@ -16,7 +16,8 @@ pipeline {
                            {print 'Контейнер не найден'}
                            
                           }                   
-                       }
+                }
+              }
                 script {
                     echo 'Update  from repository'
                     checkout([$class                           : 'GitSCM',
