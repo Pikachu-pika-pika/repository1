@@ -30,10 +30,12 @@ pipeline {
                 }
             }
         }
-        stage ('Остановка'){
+        stage ('Сборка'){
             steps{
-                script{
-                       {  sh " docker build ${WORKSPACE}/auto -t anna_m"}
+                script{withCredentials([ usernamePassword(credentialsId: 'srv_sudo',
+                                          usernameVariable: 'username',
+                                          passwordVariable: 'password')])
+                       {sh "echo '${password}' | sudo -S docker build ${WORKSPACE}/auto -t anna_m"}
                   
                 }
             }
@@ -49,6 +51,16 @@ pipeline {
                 }
             }
         }
+       stage ('Остановка'){
+            steps{
+                script{withCredentials([ usernamePassword(credentialsId: 'srv_sudo',
+                                          usernameVariable: 'username',
+                                          passwordVariable: 'password')])
+                       {sh "echo '${password}' | sudo -S docker kill anna_m"}
+                  
+                }
+            }
+        }
         stage ('Получение статистики'){
             steps{
                 script{
@@ -60,10 +72,12 @@ pipeline {
                 }
             }       
         }
-         stage ('Сборка образа'){
+         stage ('Остановка'){
             steps{
-                script{
-                       {  sh " docker stop anna_m""}
+                script{withCredentials([ usernamePassword(credentialsId: 'srv_sudo',
+                                          usernameVariable: 'username',
+                                          passwordVariable: 'password')])
+                       {sh "echo '${password}' | sudo -S docker stop anna_m"}
                   
                 }
             }
