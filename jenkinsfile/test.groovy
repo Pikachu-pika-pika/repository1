@@ -38,14 +38,7 @@ pipeline {
                 }
             }
         }
-        stage ('Сборка образа'){
-            steps{
-                script{
-                       {  sh " docker stop anna_m""}
-                  
-                }
-            }
-        }
+       
        stage ('Запуск образа'){
             steps{
                 script{withCredentials([ usernamePassword(credentialsId: 'srv_sudo',
@@ -67,6 +60,13 @@ pipeline {
                 }
             }       
         }
-        
+         stage ('Сборка образа'){
+            steps{
+                script{
+                       {  sh " docker stop anna_m""}
+                  
+                }
+            }
+        }
     }
 }
