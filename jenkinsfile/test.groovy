@@ -32,7 +32,7 @@ pipeline {
                   
                 }
             
-        }
+        
         stage ('Сборка'){
             steps{
                 script{withCredentials([ usernamePassword(credentialsId: 'srv_sudo',
@@ -75,6 +75,7 @@ pipeline {
                 }
             }       
         }
-         
+    }
+} 
 
 
