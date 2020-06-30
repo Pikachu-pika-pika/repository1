@@ -15,7 +15,8 @@ pipeline {
                          catch (Exception e) 
                            {print 'Контейнер не найден'}
                            
-                          }                   
+                          }   
+                }
                 }
               }
                 script {
@@ -75,4 +76,4 @@ pipeline {
         }
          
     }
-}
+
