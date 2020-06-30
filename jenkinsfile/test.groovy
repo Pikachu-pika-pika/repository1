@@ -30,12 +30,18 @@ pipeline {
                 }
             }
         }
+        stage ('Остановка'){
+            steps{
+                script{
+                       {  sh " docker build ${WORKSPACE}/auto -t anna_m"}
+                  
+                }
+            }
+        }
         stage ('Сборка образа'){
             steps{
-                script{withCredentials([ usernamePassword(credentialsId: 'srv_sudo',
-                                          usernameVariable: 'username',
-                                          passwordVariable: 'password')])
-                       {  sh "echo '${password}' | sudo -S docker build ${WORKSPACE}/auto -t anna_m"}
+                script{
+                       {  sh " docker stop anna_m""}
                   
                 }
             }
